@@ -46,13 +46,13 @@ async def post_person(person: PersonSchemaSave, db: AsyncSession = Depends(get_s
             await db.commit()
 
             new_person.url = f'{settings.URI_BASE}/api/v1/person/{new_person.id}'
-            person.origin = await get_origin_location(origin = person.origin, db = db)
-            person.location = await get_visit_person(person_id = person.id, db = db)
+            new_person.origin = await get_origin_location(origin = new_person.origin, db = db)
+            new_person.location = await get_visit_person(person_id = new_person.id, db = db)
             res = new_person
         else:
             consulta.url = f'{settings.URI_BASE}/api/v1/person/{consulta.id}'
-            person.origin = await get_origin_location(origin = person.origin, db = db)
-            person.location = await get_visit_person(person_id = person.id, db = db)
+            consulta.origin = await get_origin_location(origin = consulta.origin, db = db)
+            consulta.location = await get_visit_person(person_id = consulta.id, db = db)
             res = consulta
 
         return res

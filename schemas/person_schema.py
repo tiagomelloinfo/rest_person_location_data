@@ -1,11 +1,13 @@
-from pydantic import Field
 from pydantic import BaseModel as SCBaseModel
+from pydantic import Field
+
+from typing import Literal
 
 class PersonSchemaSave(SCBaseModel):
     name: str
-    status: str
+    status: Literal['Alive', 'Dead', 'unknown']
     species: str
-    gender: str
+    gender: Literal['Female', 'Male', 'Genderless', 'unknown']
     origin: str
 
 class PersonSchemaReturn(SCBaseModel):
