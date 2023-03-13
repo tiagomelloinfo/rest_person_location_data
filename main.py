@@ -19,10 +19,15 @@ async def intermediador(request: Request, call_next):
 # /api/v1/location
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
-# if __name__ == '__main__':
-#     import uvicorn
+if __name__ == '__main__':
+    import uvicorn
+    import asyncio
 
-#     uvicorn.run(
-#         'main:app', host='0.0.0.0', port=8000,
-#         log_level='info', reload=True
-#     )
+    from create_tables import create_tables
+
+    asyncio.run(create_tables())
+
+    # uvicorn.run(
+    #     'main:app', host='0.0.0.0', port=80,
+    #     log_level='info', reload=True
+    # )
